@@ -1,8 +1,20 @@
 require 'sinatra/base'
 
-class bookmark_manager < Sinatra::Base
+class Bookmark_manager < Sinatra::Base
+
+
   get '/' do
-    'Hello bookmark_manager!'
+    erb :index
+  end
+
+  post '/links' do
+    
+    redirect '/listed_links'
+  end
+
+  get '/listed_links' do
+    @links.list
+    erb :listed_links
   end
 
   # start the server if ruby file executed directly
