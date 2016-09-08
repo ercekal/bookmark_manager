@@ -6,7 +6,7 @@ class User
 
   property :id, Serial
   property :username, String
-  property :email, String , :required => true,  :format   => :email_address,
+  property :email, String , :required => true, :format   => :email_address,
     :messages => {
       :presence  => "Please enter email!",
       :is_unique => "We already have that email.",

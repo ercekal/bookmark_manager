@@ -23,4 +23,9 @@ feature 'registering users' do
       expect(page).to have_current_path('/signup')
       expect(page).to have_content('Please enter email!')
     end
+
+    scenario 'user enters a non-valid email' do
+      expect { sign_up_bad_email }.not_to change(User, :count)
+      expect(page).to have_content("Doesn't look like an email address to me ...")
+    end
   end
