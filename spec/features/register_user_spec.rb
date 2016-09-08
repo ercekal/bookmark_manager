@@ -28,4 +28,9 @@ feature 'registering users' do
       expect { sign_up_bad_email }.not_to change(User, :count)
       expect(page).to have_content("Doesn't look like an email address to me ...")
     end
+
+    scenario 'registration with already registered email' do
+      expect{2.times{sign_up}}.to change(User, :count).by(1)
+      expect(page).to have_content("We already have that email.")
+    end
   end
