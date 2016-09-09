@@ -19,8 +19,15 @@ class User
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def check_password(possible_password)
-    BCrypt::Password.new(password_digest) == possible_password
+  def self.check_password(email, possible_password)
+    user = first(:email => email)
+
+    if user && BCrypt::Password.new(user.password_digest) == possible_password
+      user
+    else
+      nil
+    end
+
   end
 
 
