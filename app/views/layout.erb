@@ -6,6 +6,7 @@
   <body>
     <% if current_user %>
     Welcome, <%= current_user.email %>
+    <a href="/users/signout">Sign out</a>
     <% end %>
     <%= yield %>
   </body>

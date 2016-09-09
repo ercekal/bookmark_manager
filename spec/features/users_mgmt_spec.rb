@@ -51,4 +51,18 @@ feature 'user can sign in/out' do
     click_button 'Sign in'
     expect(page).to have_content 'Welcome, valid@john.com'
   end
+
+  scenario 'user can sign out after signing in' do
+    one_valid_user
+    click_button 'Sign up'
+    Capybara.reset_sessions!
+    visit '/users/signin'
+    fill_in :email, with: 'valid@john.com'
+    fill_in :password, with: 'my_secret_password'
+    click_button 'Sign in'
+    click_link 'Sign out'
+    expect(current_path).to eq '/links'
+    expect(page).to have_content("Goodbye!")
+  end
+
 end

@@ -13,6 +13,7 @@ class BookMark < Sinatra::Base
   end
 
   get '/links' do
+    @error_msg = flash[:notice]
     @links = Link.all
     erb :'links/index'
   end
@@ -70,6 +71,12 @@ class BookMark < Sinatra::Base
       flash[:notice] = ['Username or password is not correct']
       redirect '/users/signin'
       end
+    end
+
+    get '/users/signout' do
+      session.clear
+      flash[:notice] = ['Goodbye!']
+      redirect '/links'
     end
 
   helpers do
