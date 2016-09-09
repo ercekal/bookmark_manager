@@ -63,19 +63,29 @@ class BookMark < Sinatra::Base
 
   post '/users/signin' do
     # check if a user with such email exist?
-
+    if User.first(:email => params[:email])
+      @user = User.first(:email => params[:email])
+    else
+      redirect '/users/signin'
+    end
     # refer to such user object
-    # check password correct?
+      # check password correct?
+    if @user.check_password(params[:password])
+      session[:user_id] = @user.id
+      redirect '/links'
+    else
+      redirect '/users/signin'
+      # flash[:notice]
+    end
     # redirect (if password correct to /links, else to hell/whatever)
+  end
 
-
-
-    Users.signin(params[:password], params[:email])? login : startpage
+    # Users.signin(params[:password], params[:email])? login : startpage
     #
     #
     # = params[:password]
     # session[:user_email] = params[:email]
-  end
+  # end
 
   helpers do
     def current_user
