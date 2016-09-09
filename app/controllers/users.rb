@@ -1,7 +1,7 @@
 class BookMark < Sinatra::Base
 
   get '/users/new' do
-    @error_msg = flash[:notice]
+    # @error_msg = flash[:notice]
     @current_email = session[:user_email]
     erb :'users/new'
   end
@@ -19,7 +19,7 @@ class BookMark < Sinatra::Base
   end
 
   get '/users/signin' do
-    @error_msg = flash[:notice]
+    # @error_msg = flash[:notice]
     erb :'users/signin'
   end
 
@@ -29,14 +29,14 @@ class BookMark < Sinatra::Base
       session[:user_id] = user.id
       redirect '/links'
       else
-      flash[:notice] = ['Username or password is not correct']
+      flash[:notice] = 'Username or password is not correct'
       redirect '/users/signin'
       end
     end
 
     get '/users/signout' do
       session.clear
-      flash[:notice] = ['Goodbye!']
+      flash[:notice] = 'Goodbye!'
       redirect '/links'
     end
 end

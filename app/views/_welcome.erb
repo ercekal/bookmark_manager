@@ -6,12 +6,9 @@
   </head>
 
   <body>
-    <%= partial :welcome %>
-    <%= partial :flash %>
-    <!-- <% if current_user %>
+    <% if current_user %>
     Welcome, <%= current_user.email %>
     <a href="/users/signout">Sign out</a>
-    <% end %> -->
-    <%= yield %>
+    <% end %>
   </body>
 </html>

@@ -5,7 +5,7 @@ class BookMark < Sinatra::Base
   end
 
   get '/links' do
-    @error_msg = flash[:notice]
+    # @error_msg = flash[:notice]
     @links = Link.all
     erb :'links/index'
   end
