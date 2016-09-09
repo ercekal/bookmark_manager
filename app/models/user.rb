@@ -19,7 +19,9 @@ class User
     self.password_digest = BCrypt::Password.create(password)
   end
 
-  def check_password(password)
-    BCrypt::Password.create(password) == self.password_digest
+  def check_password(possible_password)
+    BCrypt::Password.new(password_digest) == possible_password
   end
+
+
 end
