@@ -57,27 +57,20 @@ class BookMark < Sinatra::Base
   end
 
   get '/users/signin' do
-
+    @error_msg = flash[:notice]
     erb :'users/signin'
   end
 
   post '/users/signin' do
-
-
-      session[:user_id] = User.check_password(params[:email], params[:password])
-
+    user = User.check_password(params[:email], params[:password])
+      if user
+      session[:user_id] = user.id
       redirect '/links'
-
+      else
+      flash[:notice] = ['Username or password is not correct']
+      redirect '/users/signin'
+      end
     end
-    # redirect (if password correct to /links, else to hell/whatever)
-  end
-
-    # Users.signin(params[:password], params[:email])? login : startpage
-    #
-    #
-    # = params[:password]
-    # session[:user_email] = params[:email]
-  # end
 
   helpers do
     def current_user
