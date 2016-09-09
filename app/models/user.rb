@@ -19,4 +19,7 @@ class User
     self.password_digest = BCrypt::Password.create(password)
   end
 
+  def signin(email, password)
+    User.find_by_email() == password
+  end
 end

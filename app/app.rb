@@ -56,6 +56,27 @@ class BookMark < Sinatra::Base
     end
   end
 
+  get '/users/signin' do
+
+    erb :'users/signin'
+  end
+
+  post '/users/signin' do
+    # check if a user with such email exist?
+
+    # refer to such user object
+    # check password correct?
+    # redirect (if password correct to /links, else to hell/whatever)
+
+
+
+    Users.signin(params[:password], params[:email])? login : startpage
+    #
+    #
+    # = params[:password]
+    # session[:user_email] = params[:email]
+  end
+
   helpers do
     def current_user
       @current_user ||= User.get(session[:user_id])
